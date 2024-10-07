@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Test_Selenium.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Test_Selenium.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">time</span>
+<span class="s0">import </span><span class="s1">pytest</span>
+<span class="s0">from </span><span class="s1">selenium </span><span class="s0">import </span><span class="s1">webdriver</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">common</span><span class="s2">.</span><span class="s1">by </span><span class="s0">import </span><span class="s1">By</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">support</span><span class="s2">.</span><span class="s1">select </span><span class="s0">import </span><span class="s1">Select</span>
+
+<span class="s2">@</span><span class="s1">pytest</span><span class="s2">.</span><span class="s1">fixture</span><span class="s2">()</span>
+<span class="s0">def </span><span class="s1">environment_setup</span><span class="s2">():</span>
+    <span class="s0">global </span><span class="s1">driver</span>
+    <span class="s1">driver </span><span class="s2">= </span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">Chrome</span><span class="s2">()</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">&quot;https://rahulshettyacademy.com/angularpractice/&quot;</span><span class="s2">)</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">maximize_window</span><span class="s2">()</span>
+    <span class="s0">yield</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+
+
+<span class="s0">def </span><span class="s1">test_verification_reg</span><span class="s2">(</span><span class="s1">environment_setup</span><span class="s2">):</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">NAME</span><span class="s2">, </span><span class="s3">&quot;email&quot;</span><span class="s2">).</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;xyz@gmail.com&quot;</span><span class="s2">)</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">ID</span><span class="s2">, </span><span class="s3">&quot;exampleInputPassword1&quot;</span><span class="s2">).</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;1234#Nr&quot;</span><span class="s2">)</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">ID</span><span class="s2">, </span><span class="s3">&quot;exampleCheck1&quot;</span><span class="s2">).</span><span class="s1">click</span><span class="s2">()</span>
+
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">CSS_SELECTOR</span><span class="s2">, </span><span class="s3">&quot;input[name='name']&quot;</span><span class="s2">).</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;Nitesh&quot;</span><span class="s2">)</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;//input[@type='submit']&quot;</span><span class="s2">).</span><span class="s1">click</span><span class="s2">()</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">CSS_SELECTOR</span><span class="s2">, </span><span class="s3">&quot;#inlineRadio1&quot;</span><span class="s2">).</span><span class="s1">click</span><span class="s2">()</span>
+    <span class="s1">message </span><span class="s2">= </span><span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">CLASS_NAME</span><span class="s2">, </span><span class="s3">&quot;alert &quot;</span><span class="s2">).</span><span class="s1">text</span>
+    <span class="s1">dropdown </span><span class="s2">= </span><span class="s1">Select</span><span class="s2">(</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">ID</span><span class="s2">, </span><span class="s3">&quot;exampleFormControlSelect1&quot;</span><span class="s2">))</span>
+    <span class="s1">dropdown</span><span class="s2">.</span><span class="s1">select_by_visible_text</span><span class="s2">(</span><span class="s3">&quot;Male&quot;</span><span class="s2">)</span>
+    <span class="s1">dropdown</span><span class="s2">.</span><span class="s1">select_by_index</span><span class="s2">(</span><span class="s4">0</span><span class="s2">)</span>
+    <span class="s1">print</span><span class="s2">(</span><span class="s1">message</span><span class="s2">)</span>
+    <span class="s5">#static</span>
+    <span class="s0">assert </span><span class="s3">&quot;Success! &quot; </span><span class="s0">in </span><span class="s1">message</span>
+    <span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">&quot;(//input[@type='text'])[3]&quot;</span><span class="s2">).</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s3">&quot;Hello bhaiya  &quot;</span><span class="s2">)</span>
+
+
+
+
+
+
+
+    <span class="s1">time</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s4">5</span><span class="s2">)</span>
+    <span class="s5"># id, Xpath, CSSselector, Name, classname, linktext</span></pre>
+</body>
+</html>
